@@ -1,7 +1,7 @@
 
 async function getTotalPage() {
   const response = await fetch(
-    'http://localhost:4000/getTotalVideos'
+    'https://interiit-task-backend.herokuapp.com/getTotalVideos'
   );
   return response;
 }
@@ -27,7 +27,7 @@ function setPage(e){
 
 async function getVideos(page){
   const response = await fetch(
-    `http://localhost:4000/getTotalVideos?page=${page}`
+    `https://interiit-task-backend.herokuapp.com/getTotalVideos?page=${page}`
   );
   return response;
 }
