@@ -1,5 +1,5 @@
 
-  fetch(`https://interiit-task-backend.herokuapp.com//getTotalVideos`).then(response => response.json()).then(data => { 
+  fetch(`https://interiit-task-backend.herokuapp.com/getTotalVideos`).then(response => response.json()).then(data => { 
     for(let i=0;i<data.data.length/20;i++){
       document.getElementById('page').innerHTML+=`
       <button onclick="setPage(this)" id="${i+2}">${i+2}</button>
@@ -9,7 +9,7 @@
 
 async function setPage(e){
   
-fetch(`https://interiit-task-backend.herokuapp.com/?page=${e.id}`).then(response => response.json()).then(data => {
+fetch(`https://interiit-task-backend.herokuapp.com/getVideos?page=${e.id}`).then(response => response.json()).then(data => {
   document.getElementById('container').innerHTML='';
   for(let i=0;i<10;i++){
     document.getElementById('container').innerHTML+=`
