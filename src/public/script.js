@@ -3,17 +3,17 @@ async function getTotalPage() {
   const response = await fetch(
     'https://interiit-task-backend.herokuapp.com/getTotalVideos'
   );
-  return response;
+  return await response.json();
 }
 
 for(let i=0;i<getTotalPage()/20+1;i++){
   document.getElementById('page').innerHTML+=`
-  <button onclick="setPage(this)" id="${i+1}">${i+1}</button>
+  <button onclick="setPage(this)" id="${i+2}">${i+2}</button>
   `
 }
 
 function setPage(e){
-  page=1;
+ let page=e.id;
   for(let i=0;i<getVideos(page);i++){
     document.getElementById('container').innerHTML+=`
           <div>
@@ -23,13 +23,15 @@ function setPage(e){
           </div>
     `;
   }
+  console.log(getTotalPage())
 }
 
 async function getVideos(page){
   const response = await fetch(
     `https://interiit-task-backend.herokuapp.com/getTotalVideos?page=${page}`
   );
+  console.log(response)
   return response;
 }
 
-setPage(1);
+document.getElementById("1").click();
