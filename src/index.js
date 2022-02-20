@@ -3,10 +3,18 @@ require('dotenv').config();
 const db=require('./config/mongoose');
 const job=require('./utils/index');
 const Video=require('./models/videos')
+var path = require('path');
 
 const app = express();
 
 job.start();
+
+
+app.use(express.static(path.join(__dirname,'./public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 app.get('/getVideos',async(req,res)=>{
   let videos=await Video.find({});
