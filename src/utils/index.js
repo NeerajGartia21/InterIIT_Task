@@ -10,7 +10,9 @@ let job = new CronJob('* * 1 * * *',async function () {
     }else{
         url=`https://www.googleapis.com/youtube/v3/search?key=${process.env.API_KEY}&q=sports&part=snippet&maxResults=50&type=video`;
     }
+
     let data=await axios.get(url);
+    
     data=data.data;
     pageToken=data.nextPageToken;
     for (let i = 0; i < data.items.length;i++) {

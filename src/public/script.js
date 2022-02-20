@@ -1,37 +1,28 @@
 
-async function getTotalPage() {
-  const response = await fetch(
-    'https://interiit-task-backend.herokuapp.com/getTotalVideos'
-  );
-  return await response.json();
-}
+  fetch(`http://localhost:4000/getTotalVideos`).then(response => response.json()).then(data => { 
+    for(let i=0;i<data.data.length/20;i++){
+      document.getElementById('page').innerHTML+=`
+      <button onclick="setPage(this)" id="${i+2}">${i+2}</button>
+      `
+    }
+   })
 
-for(let i=0;i<getTotalPage()/20+1;i++){
-  document.getElementById('page').innerHTML+=`
-  <button onclick="setPage(this)" id="${i+2}">${i+2}</button>
-  `
-}
-
-function setPage(e){
- let page=e.id;
-  for(let i=0;i<getVideos(page);i++){
+async function setPage(e){
+  
+fetch(`http://localhost:4000/getVideos?page=${e.id}`).then(response => response.json()).then(data => {
+  document.getElementById('container').innerHTML='';
+  for(let i=0;i<10;i++){
     document.getElementById('container').innerHTML+=`
           <div>
-              <iframe width="400" height="300" src="https://www.youtube.com/embed/${getVideos()[i].videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              <h1>${getVideos()[i].title}</h1>
-              <p>${getVideos()[i].description}</p>
+          <h1>${data.data.videos[i].title}</h1>
+          <p>${data.data.videos[i].description}</p>
+              <iframe width="600" height="400" src="https://www.youtube.com/embed/${data.data.videos[i].videoId}"></iframe>
+             
           </div>
     `;
   }
-  console.log(getTotalPage())
-}
-
-async function getVideos(page){
-  const response = await fetch(
-    `https://interiit-task-backend.herokuapp.com/getTotalVideos?page=${page}`
-  );
-  console.log(response)
-  return response;
+})
+ 
 }
 
 document.getElementById("1").click();
