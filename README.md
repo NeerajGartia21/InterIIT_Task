@@ -1,6 +1,6 @@
 # InterIIT_Task
 
-[Link to the Demo app](https://dashboard.heroku.com/apps/interiit-task-backend/deploy/github)
+[Link to the Demo app](https://interiit-task-backend.herokuapp.com/)
 
 Local Development Environment Setup
 Install all dependencies
